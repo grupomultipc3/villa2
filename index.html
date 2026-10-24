@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa de los Niños Guatemala | Hermanos de María</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0F2C59',
+                            900: '#0A1D3A',
+                        },
+                        brand: {
+                            blue: '#1E40AF',
+                            lightBlue: '#3B82F6',
+                            gold: '#D97706',
+                            goldLight: '#F59E0B',
+                            accent: '#FEF3C7',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles & Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(10, 29, 58, 0.88) 0%, rgba(30, 64, 175, 0.75) 100%);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-slate-50 antialiased selection:bg-brand-gold selection:text-white">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-navy-900 text-white text-xs md:text-sm py-2 px-4 text-center flex justify-between items-center max-w-full mx-auto sm:px-8">
+        <span class="truncate"><i class="fas fa-heart text-amber-400 mr-2"></i>Transformando vidas a través de la educación gratuita y valores en Guatemala</span>
+        <div class="hidden md:flex space-x-4 items-center">
+            <a href="tel:+50266300000" class="hover:text-amber-400 transition-colors"><i class="fas fa-phone mr-1"></i> (502) 6630-3100</a>
+            <span>|</span>
+            <a href="#donaciones" class="hover:text-amber-400 font-semibold text-amber-300"><i class="fas fa-hand-holding-heart mr-1"></i> Haz una Donación</a>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-full bg-brand-blue flex items-center justify-center text-white font-bold text-xl shadow-lg border-2 border-brand-gold">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-extrabold text-navy-900 text-lg sm:text-xl tracking-tight leading-tight">VILLA DE LOS NIÑOS</span>
+                        <span class="text-xs text-brand-gold font-semibold tracking-wider uppercase">Guatemala • Hermanos de María</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#historia" class="text-gray-700 hover:text-brand-blue transition-colors">Historia</a>
+                    <a href="#ubicaciones" class="text-gray-700 hover:text-brand-blue transition-colors">Ubicaciones</a>
+                    <a href="#pensum" class="text-gray-700 hover:text-brand-blue transition-colors">Formación</a>
+                    <a href="#galeria" class="text-gray-700 hover:text-brand-blue transition-colors">Galería</a>
+                    <a href="#videos" class="text-gray-700 hover:text-brand-blue transition-colors">Multimedia</a>
+                    <a href="#admisiones" class="text-gray-700 hover:text-brand-blue transition-colors">Admisiones</a>
+                    <a href="#faq" class="text-gray-700 hover:text-brand-blue transition-colors">FAQ</a>
+                    <a href="#donaciones" class="bg-brand-gold hover:bg-brand-goldLight text-white px-5 py-2.5 rounded-full font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fas fa-heart mr-2"></i>Donar
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-navy-900 p-2 rounded-md hover:bg-gray-100 focus:outline-none" aria-label="Abrir menú">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#historia" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Historia y Misión</a>
+            <a href="#ubicaciones" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Ubicaciones</a>
+            <a href="#pensum" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Formación Educativa</a>
+            <a href="#galeria" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Galería de Fotos</a>
+            <a href="#videos" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Vídeos</a>
+            <a href="#admisiones" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Requisitos de Admisión</a>
+            <a href="#faq" class="block py-2 text-gray-700 font-medium hover:text-brand-blue border-b border-gray-100">Preguntas Frecuentes</a>
+            <a href="#donaciones" class="block w-full text-center bg-brand-gold text-white font-bold py-3 rounded-xl shadow mt-2">
+                <i class="fas fa-heart mr-2"></i>Apoyar / Donar Ahora
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-navy-900 text-white min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <!-- Background Banner Image with Fallback -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1600&auto=format&fit=crop" 
+                 alt="Estudiantes en el campus de Villa de los Niños" 
+                 class="w-full h-full object-cover object-center scale-105 transform filter brightness-75"
+                 onerror="this.src='https://placehold.co/1600x900/0f2c59/ffffff?text=Villa+de+los+Ninos+Guatemala'">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-amber-300 text-sm font-semibold mb-6 border border-white/20">
+                <i class="fas fa-award"></i>
+                <span>Educación Gratuita, Hospedaje y Valores para la Juventud</span>
+            </div>
+            
+            <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-6 text-white drop-shadow-md">
+                Servir con Alegría al Señor <br class="hidden sm:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200">
+                    Transformando el Futuro de Guatemala
+                </span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-gray-200 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+                Brindamos educación secundaria, capacitación técnica industrial, albergue, nutrición y formación espiritual integral a jóvenes guatemaltecos de áreas rurales en situación de extrema pobreza.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#donaciones" class="w-full sm:w-auto bg-brand-gold hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 text-center flex items-center justify-center">
+                    <i class="fas fa-hand-holding-heart mr-3 text-xl"></i> ¿Cómo Puedo Apoyar?
+                </a>
+                <a href="#historia" class="w-full sm:w-auto bg-white/15 hover:bg-white/25 text-white border border-white/30 font-semibold px-8 py-4 rounded-xl backdrop-blur-md transition-all text-center flex items-center justify-center">
+                    <i class="fas fa-compass mr-3"></i> Conocer Nuestra Historia
+                </a>
+            </div>
+
+            <!-- Quick Stats Grid -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-white/20">
+                <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-amber-400 font-heading">100%</span>
+                    <span class="text-xs sm:text-sm text-gray-300">Becas Integrales Gratuitas</span>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-amber-400 font-heading">+3,000</span>
+                    <span class="text-xs sm:text-sm text-gray-300">Jóvenes Beneficiados Activos</span>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-amber-400 font-heading">2</span>
+                    <span class="text-xs sm:text-sm text-gray-300">Grandes Campus (Varones y Niñas)</span>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 backdrop-blur-sm">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-amber-400 font-heading">+25</span>
+                    <span class="text-xs sm:text-sm text-gray-300">Años de Labor en Guatemala</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIA Y MISIÓN SECTION -->
+    <section id="historia" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold tracking-widest text-sm uppercase">Legado de Esperanza</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mt-2">Nuestra Historia y Misión</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <!-- Image & Card -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Fundación Hermanos de María y Monseñor Al Schwartz" 
+                             class="w-full h-[400px] object-cover"
+                             onerror="this.src='https://placehold.co/1000x800/1e40af/ffffff?text=Monse%C3%B1or+Aloysius+Schwartz'">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 z-20 bg-brand-gold text-white p-6 rounded-2xl shadow-xl hidden sm:block max-w-xs">
+                        <p class="font-bold text-lg font-heading">"Servir a los más pobres entre los pobres con la alegría de Cristo."</p>
+                        <span class="text-xs block mt-2 font-medium opacity-90">— Ven. Monseñor Aloysius Schwartz</span>
+                    </div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-blue-100 rounded-full -z-10"></div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold font-heading text-navy-900">
+                        El Legado del Venerable Monseñor Aloysius Schwartz (Padre Al)
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        La obra fue fundada por el sacerdote estadounidense <strong>Monseñor Aloysius Schwartz</strong> (conocido cariñosamente como <em>"El Padre Al"</em>), quien dedicó su vida entera a rescatar niños de la pobreza extrema, primero en Corea del Sur, Filipinas y posteriormente extendiendo la congregación de las <strong>Hermanas de María</strong> y los <strong>Hermanos de María</strong> a Latinoamérica.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        En Guatemala, la <strong>Villa de los Niños</strong> abrió sus puertas a finales de la década de 1990 y principios de los 2000, estableciendo un refugio educativo integral para jóvenes procedentes de los departamentos más postergados del país (como Quiché, Alta Verapaz, Huehuetenango, San Marcos, entre otros).
+                    </p>
+
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <div class="text-brand-blue font-bold text-lg flex items-center mb-1">
+                                <i class="fas fa-bullseye mr-2 text-brand-gold"></i> Misión
+                            </div>
+                            <p class="text-xs text-gray-600">Proporcionar educación integral de alta calidad, vivienda, salud y alimento a jóvenes sin recursos para formar ciudadanos dignos y profesionales.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <div class="text-brand-blue font-bold text-lg flex items-center mb-1">
+                                <i class="fas fa-eye mr-2 text-brand-gold"></i> Visión
+                            </div>
+                            <p class="text-xs text-gray-600">Erradicar el ciclo de pobreza extrema en las familias guatemaltecas mediante líderes capacitados en carreras técnicas y sólidos principios morales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillars -->
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="p-8 rounded-2xl bg-gradient-to-b from-blue-50 to-white border border-blue-100 text-center hover:shadow-xl transition-all">
+                    <div class="w-16 h-16 bg-brand-blue text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-navy-900 mb-3 font-heading">Educación de Excelencia</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Programa académico completo con enfoque en tecnologías aplicadas e industrias modernas para rápida inserción laboral.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-gradient-to-b from-amber-50 to-white border border-amber-100 text-center hover:shadow-xl transition-all">
+                    <div class="w-16 h-16 bg-brand-gold text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-navy-900 mb-3 font-heading">Hogar Internado Total</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Los estudiantes residen durante todo el año escolar recibiendo 3 comidas diarias, vestuario, alojamiento y cuidado médico integral.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-gradient-to-b from-blue-50 to-white border border-blue-100 text-center hover:shadow-xl transition-all">
+                    <div class="w-16 h-16 bg-navy-800 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg">
+                        <i class="fas fa-hands-praying"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-navy-900 mb-3 font-heading">Valores y Fe</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Formación espiritual guiada por la fe católica, promoviendo la disciplina, la humildad, el trabajo en equipo y el amor al prójimo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UBICACIONES EN GUATEMALA -->
+    <section id="ubicaciones" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold tracking-widest text-sm uppercase">Nuestras Instalaciones</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mt-2">Campus y Sedes en Guatemala</h2>
+                <p class="text-gray-600 mt-3">Infraestructura diseñada para ofrecer un ambiente seguro, moderno y propicio para el aprendizaje académico y técnico.</p>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Campus Toggle Tabs -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1 bg-white rounded-xl shadow-md border border-gray-200">
+                    <button id="btn-varones" onclick="switchCampus('varones')" class="px-6 py-3 rounded-lg font-bold text-sm transition-all bg-brand-blue text-white shadow">
+                        <i class="fas fa-mars mr-2"></i>Villa de los Niños (Varones)
+                    </button>
+                    <button id="btn-ninas" onclick="switchCampus('ninas')" class="px-6 py-3 rounded-lg font-bold text-sm transition-all text-gray-600 hover:text-brand-blue">
+                        <i class="fas fa-venus mr-2"></i>Villa de las Niñas (Señoritas)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Campus Content: VARONES -->
+            <div id="campus-varones" class="grid lg:grid-cols-2 gap-8 items-center bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                <div class="space-y-6">
+                    <div class="inline-block bg-blue-100 text-brand-blue font-semibold text-xs px-3 py-1 rounded-full uppercase">Sede Principal Varones</div>
+                    <h3 class="text-3xl font-bold font-heading text-navy-900">San José Pinula, Guatemala</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Ubicada en un extenso terreno rodeado de áreas verdes en el municipio de San José Pinula (Departamento de Guatemala). Ofrece aire puro y un entorno seguro libre de distracciones urbanas, ideal para la concentración técnica y académica.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Taller industrial de mecánica automotriz y estructuras metálicas.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Laboratorios informáticos equipados con redes de alta velocidad.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Campos deportivos (fútbol, baloncesto, atletismo) y gimnasio multifuncional.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Dormitorios amplios, comedor centralizado y clínica médica interna.</li>
+                    </ul>
+                    <div class="pt-4 flex items-center text-xs text-gray-500 border-t">
+                        <i class="fas fa-map-marker-alt text-red-500 mr-2 text-base"></i>
+                        <span>Carretera a San José Pinula, Guatemala. PBX: (502) 6630-3100</span>
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg h-[350px] relative">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Instalaciones Villa de los Niños San José Pinula" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='https://placehold.co/1000x700/0f2c59/ffffff?text=Campus+San+Jose+Pinula'">
+                    <div class="absolute top-4 right-4 bg-navy-900/80 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg">
+                        <i class="fas fa-tree mr-1"></i> +50 Manzanas de instalaciones
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campus Content: NIÑAS -->
+            <div id="campus-ninas" class="hidden grid lg:grid-cols-2 gap-8 items-center bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                <div class="space-y-6">
+                    <div class="inline-block bg-pink-100 text-pink-700 font-semibold text-xs px-3 py-1 rounded-full uppercase">Sede Señoritas</div>
+                    <h3 class="text-3xl font-bold font-heading text-navy-900">Villa de las Niñas (Guatemala)</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Campus diseñado especialmente para la formación integral de mujeres jóvenes. Dirigido por las <strong>Hermanas de María</strong>, enfocado en el empoderamiento femenino a través de carreras técnicas, alta costura, gastronomía e informática.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Talleres de confección textil industrial y diseño de modas.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Cocina industrial y laboratorio de procesamiento de alimentos.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Aulas de mecanografía digital, secretariado y ciencias computacionales.</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-brand-gold mt-1 mr-3"></i> Áreas artísticas, orquesta de cuerdas y coros vocales.</li>
+                    </ul>
+                    <div class="pt-4 flex items-center text-xs text-gray-500 border-t">
+                        <i class="fas fa-map-marker-alt text-red-500 mr-2 text-base"></i>
+                        <span>Campus San José Pinula / Sede Señoritas, Guatemala.</span>
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg h-[350px] relative">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Instalaciones Villa de las Niñas" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='https://placehold.co/1000x700/1e40af/ffffff?text=Villa+de+las+Ninas'">
+                    <div class="absolute top-4 right-4 bg-navy-900/80 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg">
+                        <i class="fas fa-female mr-1"></i> Formación Femenina Integral
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PENSUM Y OFERTA EDUCATIVA -->
+    <section id="pensum" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold tracking-widest text-sm uppercase">Preparación para la Vida</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mt-2">Oferta Educativa y Pensum Técnico</h2>
+                <p class="text-gray-600 mt-3">Combinamos el currículum nacional base con certificaciones técnicas intensivas.</p>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Academic Levels -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Nivel Basico -->
+                <div class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-8 hover:border-brand-blue transition-all">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-blue text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow">
+                            1
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold font-heading text-navy-900">Educación Básica (1° a 3° Básico)</h3>
+                            <span class="text-xs text-brand-gold font-bold uppercase">Formación Fundamental</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        Refuerzo intensivo en matemáticas, lenguaje, ciencias naturales, ciencias sociales e inglés, nivelando a estudiantes que provienen de escuelas rurales con deficiencias de aprendizaje.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i> Computación básica y robótica inicial</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i> Educación física y atletismo estructurado</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i> Valores éticos y orientación vocacional</li>
+                    </ul>
+                </div>
+
+                <!-- Perito Tecnico -->
+                <div class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-8 hover:border-brand-gold transition-all">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow">
+                            2
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold font-heading text-navy-900">Bachillerato / Perito Técnico</h3>
+                            <span class="text-xs text-brand-blue font-bold uppercase">Especialización Laboral</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        Diversificado de 3 años con enfoque práctico. Los graduados obtienen un título oficial avalado por el Ministerio de Educación y un diploma técnico de alta demanda en el mercado industrial.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i> Prácticas profesionales supervisadas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i> Certificaciones en herramientas técnicas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i> Preparación para universidad o empleo inmediato</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Technical Specialties Grid -->
+            <h3 class="text-2xl font-bold font-heading text-navy-900 mb-8 text-center">Especialidades Técnicas Vocacionales</h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="p-6 bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-blue-100 text-brand-blue rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-navy-900 mb-2">Mecánica Industrial y Automotriz</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Mantenimiento de motores, soldadura, torneado de piezas y diagnóstico mecánico con escáneres modernos.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-amber-100 text-brand-gold rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-navy-900 mb-2">Informática y Redes</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Programación, mantenimiento de hardware, redes de datos, diseño web y administración de sistemas.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-6 bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-green-100 text-green-700 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-navy-900 mb-2">Electricidad Industrial</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Instalaciones domiciliarias e industriales, automatización de motores y energía renovable.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-6 bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-navy-900 mb-2">Corte, Confección y Gastronomía</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Especialmente en la Villa de las Niñas: confección textil en masa, patronaje, repostería y cocina comercial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA DE FOTOGRAFÍAS -->
+    <section id="galeria" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold tracking-widest text-sm uppercase">Momentos y Vida Cotidiana</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mt-2">Galería Fotográfica</h2>
+                <p class="text-gray-600 mt-3">Haz clic en cualquier imagen para verla en tamaño completo.</p>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Item 1 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-black h-64" onclick="openModal('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200', 'Aulas de Clase y Aprendizaje Academic')">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop" 
+                         alt="Aulas y educación" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                         onerror="this.src='https://placehold.co/600x400/0f2c59/ffffff?text=Aulas+de+Clase'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div class="text-white">
+                            <span class="text-amber-400 font-bold text-xs uppercase">Educación</span>
+                            <h4 class="font-bold text-lg">Aulas e Innovación</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-black h-64" onclick="openModal('https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200', 'Talleres Técnicos e Industriales')">
+                    <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=600&auto=format&fit=crop" 
+                         alt="Talleres de mecánica" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                         onerror="this.src='https://placehold.co/600x400/1e40af/ffffff?text=Talleres+Tecnicos'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div class="text-white">
+                            <span class="text-amber-400 font-bold text-xs uppercase">Capacitación</span>
+                            <h4 class="font-bold text-lg">Talleres Prácticos</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-black h-64" onclick="openModal('https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1200', 'Convivencia y Actividades Culturales')">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop" 
+                         alt="Convivencia estudiantil" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                         onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Convivencia'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div class="text-white">
+                            <span class="text-amber-400 font-bold text-xs uppercase">Comunidad</span>
+                            <h4 class="font-bold text-lg">Valores y Hermandad</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-black h-64" onclick="openModal('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200', 'Deportes y Salud Física')">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop" 
+                         alt="Deportes y atletismo" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                         onerror="this.src='https://placehold.co/600x400/0f2c59/ffffff?text=Deportes'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div class="text-white">
+                            <span class="text-amber-400 font-bold text-xs uppercase">Deportes</span>
+                            <h4 class="font-bold text-lg">Instalaciones Deportivas</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-black h-64" onclick="openModal('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200', 'Laboratorios de Computación')">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" 
+                         alt="Laboratorios de Computación" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                         onerror="this.src='https://placehold.co/600x400/1e40af/ffffff?text=Informatica'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div class="text-white">
+                            <span class="text-amber-400 font-bold text-xs uppercase">Tecnología</span>
+                            <h4 class="font-bold text-lg">Aulas de Informática</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-black h-64" onclick="openModal('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200', 'Graduación y Exitos de Exalumnos')">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop" 
+                         alt="Graduación de Jóvenes" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                         onerror="this.src='https://placehold.co/600x400/d97706/ffffff?text=Graduacion'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <div class="text-white">
+                            <span class="text-amber-400 font-bold text-xs uppercase">Futuro</span>
+                            <h4 class="font-bold text-lg">Graduaciones Anuales</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE MODAL POPUP -->
+    <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4">
+        <button onclick="closeModal()" class="absolute top-6 right-6 text-white text-3xl hover:text-amber-400 focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="max-w-4xl w-full text-center">
+            <img id="modal-img" src="" alt="Vista previa" class="max-h-[80vh] mx-auto rounded-xl shadow-2xl object-contain">
+            <p id="modal-caption" class="text-white text-lg font-semibold mt-4 font-heading"></p>
+        </div>
+    </div>
+
+    <!-- VIDEOS Y MULTIMEDIA -->
+    <section id="videos" class="py-20 bg-navy-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-amber-400 font-bold tracking-widest text-sm uppercase">Documentales y Reportajes</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-bold mt-2">Testimonios e Historias de Vida</h2>
+                <p class="text-gray-300 mt-3">Conoce el impacto transformador a través de la voz de nuestros estudiantes y los Hermanos de María.</p>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Video 1 -->
+                <div class="bg-navy-800 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                    <div class="aspect-w-16 aspect-h-9 relative min-h-[260px] sm:min-h-[315px]">
+                        <iframe class="w-full h-full absolute inset-0" 
+                                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+                                title="Reportaje Villa de los Niños Guatemala" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="bg-brand-gold text-xs font-bold px-2.5 py-1 rounded text-white">Documental</span>
+                        <h4 class="text-xl font-bold font-heading mt-2">Un Día en la Villa de los Niños</h4>
+                        <p class="text-gray-300 text-sm mt-2">Recorrido completo por la rutina diaria, desde el amanecer, las clases técnicas hasta el tiempo de deporte y oración.</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="bg-navy-800 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                    <div class="aspect-w-16 aspect-h-9 relative min-h-[260px] sm:min-h-[315px]">
+                        <iframe class="w-full h-full absolute inset-0" 
+                                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+                                title="Testimonio de Graduados" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="bg-brand-blue text-xs font-bold px-2.5 py-1 rounded text-white">Testimonios</span>
+                        <h4 class="text-xl font-bold font-heading mt-2">Historias de Éxito de Exalumnos</h4>
+                        <p class="text-gray-300 text-sm mt-2">Jóvenes graduados comparten cómo la Villa cambió sus vidas y el impacto económico positivo en sus familias de origen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMISIONES Y CÓMO AYUDAR / DONACIONES -->
+    <section id="admisiones" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- ADMISIONES -->
+            <div class="mb-20">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-blue font-bold tracking-widest text-sm uppercase">Proceso de Selección</span>
+                    <h2 class="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mt-2">Requisitos de Admisión</h2>
+                    <p class="text-gray-600 mt-2">Atendemos exclusivamente a jóvenes con verdaderos deseos de superación y de escasos recursos económicos.</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center relative">
+                        <div class="w-12 h-12 bg-navy-900 text-white font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">1</div>
+                        <h4 class="font-bold text-navy-900 mb-2">Edad y Grado</h4>
+                        <p class="text-xs text-gray-600">Haber concluido el 6° Grado de Primaria y tener entre 11 y 13 años al momento del ingreso.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center relative">
+                        <div class="w-12 h-12 bg-navy-900 text-white font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">2</div>
+                        <h4 class="font-bold text-navy-900 mb-2">Estudio Socioeconómico</h4>
+                        <p class="text-xs text-gray-600">Verificación de pobreza extrema o vulnerabilidad social en comunidades rurales.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center relative">
+                        <div class="w-12 h-12 bg-navy-900 text-white font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">3</div>
+                        <h4 class="font-bold text-navy-900 mb-2">Examen y Entrevista</h4>
+                        <p class="text-xs text-gray-600">Evaluación académica básica de nivelación e interrogatorio a padres/tutores legales.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center relative">
+                        <div class="w-12 h-12 bg-navy-900 text-white font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">4</div>
+                        <h4 class="font-bold text-navy-900 mb-2">Ingreso e Internado</h4>
+                        <p class="text-xs text-gray-600">Incorporación al inicio del ciclo escolar oficial con beca cubierta al 100%.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÓMO AYUDAR / DONACIONES -->
+            <div id="donaciones" class="bg-gradient-to-br from-navy-900 via-brand-blue to-navy-800 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="bg-brand-gold text-white font-bold text-xs px-3 py-1 rounded-full uppercase">Padrinazgo y Apoyo</span>
+                        <h2 class="text-3xl sm:text-4xl font-heading font-bold mt-4 mb-4">Tu Generosidad Cambia Vidas Para Siempre</h2>
+                        <p class="text-gray-200 text-sm sm:text-base leading-relaxed mb-6">
+                            Cada estudiante en la Villa recibe vivienda, 3 comidas balanceadas, uniformes, calzado, útiles escolares y formación técnica sin costo alguno para sus familias. Todo esto es posible gracias a donantes de corazón generoso.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-amber-400 text-navy-900 rounded-full flex items-center justify-center font-bold">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium">Donación Única o Mensual Recurrente</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-amber-400 text-navy-900 rounded-full flex items-center justify-center font-bold">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium">Programa de Padrinazgo Educativo</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-amber-400 text-navy-900 rounded-full flex items-center justify-center font-bold">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="text-sm font-medium">Donación en Especie (Alimentos, Herramientas, Calzado)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Donation Form / Calculator -->
+                    <div class="bg-white text-gray-800 rounded-2xl p-6 sm:p-8 shadow-xl">
+                        <h3 class="font-bold text-xl text-navy-900 font-heading mb-4 text-center">Calculadora de Impacto de Donación</h3>
+                        
+                        <!-- Select Amount -->
+                        <div class="grid grid-cols-3 gap-3 mb-6">
+                            <button onclick="setDonation(100)" class="donation-btn border-2 border-brand-blue text-brand-blue font-bold py-2 rounded-xl text-sm hover:bg-brand-blue hover:text-white transition-all">Q100</button>
+                            <button onclick="setDonation(250)" class="donation-btn border-2 border-brand-blue bg-brand-blue text-white font-bold py-2 rounded-xl text-sm hover:opacity-90 transition-all">Q250</button>
+                            <button onclick="setDonation(500)" class="donation-btn border-2 border-brand-blue text-brand-blue font-bold py-2 rounded-xl text-sm hover:bg-brand-blue hover:text-white transition-all">Q500</button>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Monto Personalizado (GTQ - Quetzales):</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-gray-500 font-bold">Q</span>
+                                <input type="number" id="custom-amount" value="250" oninput="updateImpact()" class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue focus:outline-none font-bold text-gray-800">
+                            </div>
+                        </div>
+
+                        <!-- Impact Description Box -->
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-xs sm:text-sm text-gray-700">
+                            <i class="fas fa-lightbulb text-brand-gold mr-2"></i>
+                            <span id="impact-text">Con <strong>Q250</strong> provees materiales escolares y alimentación completa para un estudiante durante 15 días.</span>
+                        </div>
+
+                        <button onclick="handleDonationSubmit()" class="w-full bg-brand-gold hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl shadow-md transition-all text-center flex items-center justify-center text-sm sm:text-base">
+                            <i class="fas fa-credit-card mr-2"></i> Realizar Donación Segura
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES (FAQ) -->
+    <section id="faq" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-bold tracking-widest text-sm uppercase">Resuelve tus Dudas</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mt-2">Preguntas Frecuentes</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Search Filter for FAQ -->
+            <div class="mb-8">
+                <div class="relative">
+                    <input type="text" id="faq-search" onkeyup="filterFAQ()" placeholder="Buscar pregunta... (ej. costo, visitas, carreras)" class="w-full px-5 py-3 rounded-2xl border border-gray-300 shadow-sm focus:ring-2 focus:ring-brand-blue focus:outline-none text-sm">
+                    <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Accordion Items -->
+            <div class="space-y-4" id="faq-container">
+                <!-- Item 1 -->
+                <div class="faq-item bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-bold text-navy-900 font-heading flex justify-between items-center focus:outline-none">
+                        <span>¿Tiene algún costo mensual la educación en Villa de los Niños?</span>
+                        <i class="fas fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        <p class="py-4 border-t border-gray-100">
+                            <strong>No.</strong> Todo el programa educativo, el hospedaje, la alimentación, los uniformes, servicios médicos y materiales técnicos son 100% gratuitos para los alumnos seleccionados de familias de escasos recursos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="faq-item bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-bold text-navy-900 font-heading flex justify-between items-center focus:outline-none">
+                        <span>¿Los estudiantes viven en la institución durante todo el año?</span>
+                        <i class="fas fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        <p class="py-4 border-t border-gray-100">
+                            Sí. Es un régimen de internado completo. Los estudiantes regresan a sus hogares con sus familias durante los períodos de vacaciones oficiales (por ejemplo, en fin de año y recesos autorizados).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="faq-item bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-bold text-navy-900 font-heading flex justify-between items-center focus:outline-none">
+                        <span>¿Quiénes administran y sostienen la Villa de los Niños?</span>
+                        <i class="fas fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        <p class="py-4 border-t border-gray-100">
+                            La institución es administrada por la congregación religiosa de los <strong>Hermanos de María</strong> y las <strong>Hermanas de María</strong>, fundada por Monseñor Aloysius Schwartz. Se sostiene íntegramente gracias a las donaciones privadas de personas e instituciones benéficas nacionales e internacionales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="faq-item bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button onclick="toggleAccordion(this)" class="w-full px-6 py-4 text-left font-bold text-navy-900 font-heading flex justify-between items-center focus:outline-none">
+                        <span>¿Cómo puedo postular a un niño o niña de mi comunidad?</span>
+                        <i class="fas fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content px-6 text-gray-600 text-sm">
+                        <p class="py-4 border-t border-gray-100">
+                            Debes comunicarte directamente a la oficina de trabajo social o admisiones durante los meses de agosto a octubre. Las Hermanas y Hermanos de María realizan giras de reclutamiento en parroquias y comunidades rurales de todo el país.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-900 text-white pt-16 pb-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-blue flex items-center justify-center text-white font-bold border border-brand-gold">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-lg text-white">VILLA DE LOS NIÑOS</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Asociación Villa de los Niños / Hermanos de María en Guatemala. Educando para la vida y transformando comunidades a través de la caridad y la tecnología.
+                    </p>
+                    <div class="flex space-x-3 pt-2">
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-brand-blue rounded-full flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-brand-blue rounded-full flex items-center justify-center transition-colors"><i class="fab fa-youtube text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-brand-blue rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-bold text-amber-400 font-heading text-sm uppercase mb-4">Navegación</h4>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li><a href="#historia" class="hover:text-white transition-colors">Historia de Monseñor Al Schwartz</a></li>
+                        <li><a href="#ubicaciones" class="hover:text-white transition-colors">Campus San José Pinula</a></li>
+                        <li><a href="#pensum" class="hover:text-white transition-colors">Carreras Técnicas Vocacionales</a></li>
+                        <li><a href="#galeria" class="hover:text-white transition-colors">Galería de Fotos</a></li>
+                        <li><a href="#admisiones" class="hover:text-white transition-colors">Requisitos de Admisión</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-bold text-amber-400 font-heading text-sm uppercase mb-4">Ubicación y Contacto</h4>
+                    <ul class="space-y-3 text-xs text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-amber-400 mr-2 mt-0.5"></i>
+                            <span>Carretera a San José Pinula, Departamento de Guatemala, Guatemala C.A.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-amber-400 mr-2"></i>
+                            <span>(502) 6630-3100 / 6630-3101</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-amber-400 mr-2"></i>
+                            <span>info@villadelosninos.org.gt</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="font-bold text-amber-400 font-heading text-sm uppercase mb-4">Boletín Informativo</h4>
+                    <p class="text-xs text-gray-400 mb-3">Suscríbete para recibir historias de éxito e informes de impacto anuales.</p>
+                    <form onsubmit="event.preventDefault(); showCustomAlert('¡Gracias por suscribirte a nuestro boletín!');" class="space-y-2">
+                        <input type="email" required placeholder="Tu correo electrónico" class="w-full px-3 py-2 text-xs bg-navy-800 border border-white/20 rounded-lg text-white focus:outline-none focus:border-brand-gold">
+                        <button type="submit" class="w-full bg-brand-gold hover:bg-amber-600 text-white text-xs font-bold py-2 rounded-lg transition-colors">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 text-center text-xs text-gray-500">
+                <p>&copy; 2026 Villa de los Niños Guatemala - Hermanos de María. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CUSTOM ALERT MESSAGE BOX (Replacing default alert) -->
+    <div id="custom-alert" class="fixed inset-0 z-50 bg-black/60 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl transform transition-all">
+            <div class="w-12 h-12 bg-amber-100 text-brand-gold rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h3 class="font-bold text-lg text-navy-900 mb-2 font-heading" id="alert-title font-bold">Aviso</h3>
+            <p class="text-sm text-gray-600 mb-6" id="alert-msg">Mensaje de confirmación aquí.</p>
+            <button onclick="closeCustomAlert()" class="w-full bg-brand-blue text-white font-bold py-2.5 rounded-xl shadow hover:bg-blue-800 transition-colors">Entendido</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close Mobile Menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Campus Switcher
+        function switchCampus(campus) {
+            const varonesTab = document.getElementById('campus-varones');
+            const ninasTab = document.getElementById('campus-ninas');
+            const btnVarones = document.getElementById('btn-varones');
+            const btnNinas = document.getElementById('btn-ninas');
+
+            if (campus === 'varones') {
+                varonesTab.classList.remove('hidden');
+                ninasTab.classList.add('hidden');
+
+                btnVarones.className = 'px-6 py-3 rounded-lg font-bold text-sm transition-all bg-brand-blue text-white shadow';
+                btnNinas.className = 'px-6 py-3 rounded-lg font-bold text-sm transition-all text-gray-600 hover:text-brand-blue';
+            } else {
+                varonesTab.classList.add('hidden');
+                ninasTab.classList.remove('hidden');
+
+                btnNinas.className = 'px-6 py-3 rounded-lg font-bold text-sm transition-all bg-brand-blue text-white shadow';
+                btnVarones.className = 'px-6 py-3 rounded-lg font-bold text-sm transition-all text-gray-600 hover:text-brand-blue';
+            }
+        }
+
+        // Image Modal Popup
+        function openModal(imgSrc, caption) {
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('modal-caption').innerText = caption;
+            document.getElementById('image-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('image-modal').classList.add('hidden');
+        }
+
+        // Donation Impact Calculator
+        function setDonation(amount) {
+            document.getElementById('custom-amount').value = amount;
+            updateImpact();
+        }
+
+        function updateImpact() {
+            const amount = parseFloat(document.getElementById('custom-amount').value) || 0;
+            const impactText = document.getElementById('impact-text');
+
+            if (amount < 100) {
+                impactText.innerHTML = `Con <strong>Q${amount}</strong> apoyas con kits de papelería e higiene mensual para un joven.`;
+            } else if (amount >= 100 && amount < 300) {
+                impactText.innerHTML = `Con <strong>Q${amount}</strong> provees materiales escolares y alimentación completa para un estudiante durante 15 días.`;
+            } else if (amount >= 300 && amount < 1000) {
+                impactText.innerHTML = `Con <strong>Q${amount}</strong> cubres el hospedaje, uniforme técnico y alimentación de un estudiante durante un mes completo.`;
+            } else {
+                impactText.innerHTML = `Con <strong>Q${amount}</strong> te conviertes en un Gran Padrino, financiando la formación industrial de varios jóvenes.`;
+            }
+        }
+
+        function handleDonationSubmit() {
+            const amount = document.getElementById('custom-amount').value;
+            showCustomAlert(`Gracias por tu intención de donar Q${amount}. Serás redirigido a nuestra pasarela bancaria segura.`);
+        }
+
+        // FAQ Accordion Toggle
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+
+            // Close other open accordions
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                if (item !== content) {
+                    item.classList.remove('open');
+                    if(item.previousElementSibling) {
+                        item.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            content.classList.toggle('open');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Search Filter for FAQ
+        function filterFAQ() {
+            const query = document.getElementById('faq-search').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Custom UI Alert Box
+        function showCustomAlert(msg) {
+            document.getElementById('alert-msg').innerText = msg;
+            document.getElementById('custom-alert').classList.remove('hidden');
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('custom-alert').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
